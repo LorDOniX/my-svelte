@@ -1,0 +1,15 @@
+npx degit sveltejs/template my-svelte
+npm install
+npm run dev
+
+vs code extensions
+Remote - Containers
+Svelte for VS Code
+Docker
+
+systém komponent
+propagace signálů
+routovač
+redux
+
+$: count = hodnota
