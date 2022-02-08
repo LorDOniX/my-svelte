@@ -25,6 +25,12 @@ Parametr `build` vytvoří build pro nasazení do produkce. Výstupní složka p
 npm run build
 ```
 
+## Env prostředí
+
+Soubor `.env` je pro lokální vývoj a soubor `.env.production` se použije pro produkční build. Je potřeba, aby každý klíč začínal prefixem `VITE_`.
+Pro typescript je pak potřeba definovat, které klíče může očekávat v `src/env.d.ts`. Použití klíčů je vidět v `App.svelte` přes console.log.
+
+
 ## Eslint
 
 Spouští se při vytvoření serveru, poté pro každý změněný soubor. Manuálně se dá spustit pomocí příkazu:
@@ -32,6 +38,10 @@ Spouští se při vytvoření serveru, poté pro každý změněný soubor. Manu
 ```bash
 npm run eslint
 ```
+
+Pro vývoj a sledování změn jsem musel vytvořit vlastní plugin pro vite v souboru - `vite-eslint-plugin.js`.
+Ten funguje tak, že při eventu změny souboru zavolá eslint pro daný soubor a výstup se loguje do konzole.
+V případě chyby to ovšem neumí odstavit server.
 
 ## Testování
 
@@ -70,6 +80,6 @@ Volání skriptu:
 node i18n.js
 ```
 
-funguje tak, že projde všechny zdrojové soubory, vytáhne jejich klíče a z nich se vygeneruje nový jazykový soubor ve složce `i18n`.
+Funguje tak, že projde všechny zdrojové soubory, vytáhne jejich klíče a z nich se vygeneruje nový jazykový soubor ve složce `i18n`.
 Pokud už soubor existuje, tak se při změně klíčů - přidání/odebrání vezme aktuální json s překlady, a pokud už dříve překlady existovaly, tak se použijí.
 Výstupem je pak soubor ve složce `src/langs/`. Jazyky jsou součástí balíčku a nejsou lazy loadované.
