@@ -22,9 +22,6 @@
 <Router url="{url}">
 	<MainContent>
 		<Menu />
-		<div>
-			<img src={Heart} alt="" />
-		</div>
 		<Content>
 			<Route path="/detail/:id" let:params>
 				<DetailPage {params} />
@@ -34,5 +31,8 @@
 			<Route path="/user" component="{UserPage}" />
 			<Route path="/" component="{MainPage}" />
 		</Content>
+		<div class="footer">
+			Svelte <img src={Heart} alt="" />
+		</div>
 	</MainContent>
 </Router>

@@ -25,6 +25,17 @@ Parametr `build` vytvoří build pro nasazení do produkce. Výstupní složka p
 npm run build
 ```
 
+### Build assetů
+
+Je možnost kromě přidání souborů do public složky, je taky přes `src/assets` přidat přímo v kódu např.
+
+```
+import Heart from "./assets/heart.svg";
+<img src={Heart} alt="" />
+```
+
+Soubor se pak zbuildí jako asset se svým hashem.
+
 ## Env prostředí
 
 Soubor `.env` je pro lokální vývoj a soubor `.env.production` se použije pro produkční build. Je potřeba, aby každý klíč začínal prefixem `VITE_`.
@@ -83,3 +94,4 @@ node i18n.js
 Funguje tak, že projde všechny zdrojové soubory, vytáhne jejich klíče a z nich se vygeneruje nový jazykový soubor ve složce `i18n`.
 Pokud už soubor existuje, tak se při změně klíčů - přidání/odebrání vezme aktuální json s překlady, a pokud už dříve překlady existovaly, tak se použijí.
 Výstupem je pak soubor ve složce `src/langs/`. Jazyky jsou součástí balíčku a nejsou lazy loadované.
+Soubor s jazykem pak používá klíč - český překlad, hodnota klíče je překlad pro daný jazyk.
