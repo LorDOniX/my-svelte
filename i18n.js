@@ -9,7 +9,7 @@ const TRANS_REGEX = /trans\([^)]+\)/g;
 const TRANS_PL_REGEX = /transPl\([^)]+\)/g;
 const STRING_QUOTE_BRACKET_REGEX = /\(\s*(['"`])/;
 const STRING_QUOTE_REGEX = /\s*(['"`])/;
-const SKIP_FILES = ["trans.js"];
+const SKIP_FILES = ["trans.js", "en.js"];
 
 function getFilesFromDirectory(startPath, exts, output) {
 	if (!output) {
@@ -123,7 +123,11 @@ function getI18nSrcFile(langKey) {
 }
 
 function getI18nOutputFile(langKey) {
-	return `./public/build/lang-${langKey}.js`;
+	return `./src/langs/${langKey}.ts`;
+}
+
+function strReplaceAt(value, position, replaceValue) {
+	return value.substring(0, position) + replaceValue + value.substring(position);
 }
 
 function main() {
@@ -154,9 +158,13 @@ function main() {
 		fs.writeFileSync(srcFileName, JSON.stringify(newFileJSON, null, "\t"), "utf-8");
 
 		// vygenerujeme jazyk
-		const langData = JSON.stringify(newFileJSON, null, "\t").replace("{", `export default {`);
+		let langData = JSON.stringify(newFileJSON, null, "\t").replace("{", `export default {`);
 		console.log(`Generating lang file ${outputFileName}`);
-		fs.writeFileSync(outputFileName, langData, "utf-8");
+		const lastQuote = langData.lastIndexOf(`"`);
+		langData = strReplaceAt(langData, lastQuote + 1, `,`);
+		const lastBracket = langData.lastIndexOf(`}`);
+		langData = strReplaceAt(langData, lastBracket + 1, `;`);
+		fs.writeFileSync(outputFileName, langData + "\n", "utf-8");
 	}
 }
 

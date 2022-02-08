@@ -1,5 +1,9 @@
 /* eslint-disable no-magic-numbers */
-const DEFAULT_LANG = "cs";
+import LANG_EN_DATA from "../langs/en";
+import { LANG_CS, LANG_EN } from "../constants";
+
+const ALL_LANGS = [LANG_CS, LANG_EN];
+const DEFAULT_LANG = LANG_CS;
 const PL_SEPARATOR = "/";
 
 type tplotOptions = {
@@ -9,12 +13,13 @@ type tplotOptions = {
 let transData: tplotOptions = {};
 let appLang = "";
 
-export async function loadTrans(lang: string) {
-	if (lang === "en") {
+export function loadTrans(lang: string) {
+	if (ALL_LANGS.indexOf(lang) !== -1 && lang !== appLang) {
 		appLang = lang;
-		transData = (await import("/build/lang-en.js")).default;
-	} else if (lang === "cs") {
-		appLang = lang;
+
+		if (lang === LANG_EN) {
+			transData = LANG_EN_DATA;
+		}
 	}
 }
 

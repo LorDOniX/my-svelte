@@ -1,109 +1,127 @@
-*Psst — looking for a more complete solution? Check out [SvelteKit](https://kit.svelte.dev), the official framework for building web applications of all sizes, with a beautiful development experience and flexible filesystem-based routing.*
+# Svelte Vite Starter
 
-*Looking for a shareable component template instead? You can [use SvelteKit for that as well](https://kit.svelte.dev/docs#packaging) or the older [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+A starter template for [Svelte](https://svelte.dev) that comes preconfigured with [Vite](https://vitejs.dev/),
+TypeScript, SCSS, Babel, Autoprefixer, and HMR.
+
+- [Getting started](#getting-started)
+  - [Installation](#installation)
+  - [Starting the development server](#starting-the-development-server)
+  - [Building for production](#building-for-production)
+- [Usage](#usage)
+  - [Global stylesheets](#global-stylesheets)
+  - [Browsers list](#browsers-list)
+  - [Babel customization](#babel-customization)
+  - [Source maps in production](#source-maps-in-production)
+  - [Import path aliases](#import-path-aliases)
+
+> ⚠ **Consider trying the new vite-based [SvelteKit](https://kit.svelte.dev/)!**
 
 ---
 
-# svelte app
+## Getting started
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+### Installation
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-## Get started
-
-Install the dependencies...
+Pull the template files with [`degit`](https://github.com/Rich-Harris/degit) and install dependencies.
 
 ```bash
-cd svelte-app
+npx degit baileyherbert/svelte-vite-starter
 npm install
 ```
 
-...then start [Rollup](https://rollupjs.org):
+### Starting the development server
+
+Run the `dev` script to start a live development server with hot module replacement. Then check the output for a link
+to the app, which is usually `http://localhost:5000/`:
 
 ```bash
 npm run dev
 ```
 
-Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+### Building for production
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
+Run the `build` script to bundle the app for production. The bundle will be created at `/dist/assets/` and the `dist`
+directory will contain all files you need to host the app:
 
 ```bash
 npm run build
 ```
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+> 💡 **Tip:** You can quickly test the production build by running `npm run preview` locally.
 
+---
 
-## Single-page app mode
+## Usage
 
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
+### Global stylesheets
 
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+Edit the `index.html` file and add additional `<link>` references to stylesheets:
 
-```js
-"start": "sirv public --single"
+```html
+<link rel="stylesheet" type="text/css" href="/src/styles/index.scss">
 ```
 
-## Using TypeScript
+You can specify `css`, `scss`, and `sass` files here, and they will be compiled and minified as necessary. These styles
+will be added to the bundle in the order specified. Svelte's styles will always load last.
 
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
+> 💡 **Note:** The paths to these assets must start with `/` in order to resolve.
 
-```bash
-node scripts/setupTypeScript.js
+### Browsers list
+
+The bundle will be compiled to run on the browsers specified in `package.json`:
+
+```json
+"browserslist": [
+    "defaults"
+]
 ```
 
-Or remove the script via:
+If you wish to customize this, please refer to the list of
+[example browserslist queries](https://github.com/browserslist/browserslist#full-list).
 
-```bash
-rm scripts/setupTypeScript.js
+### Babel customization
+
+Production builds are compiled with Babel automatically. If you wish to disable it, edit the `vite.config.ts` file:
+
+```ts
+const useBabel = false;
 ```
 
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
+### Source maps in production
 
-## Deploying to the web
+Source maps are generated automatically during development. They are not included in production builds by default. If
+you wish to change this behavior, edit the `vite.config.ts` file:
 
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
+```ts
+const sourceMapsInProduction = true;
 ```
 
-Then, from within your project folder:
+### Import path aliases
 
-```bash
-cd public
-vercel deploy --name my-project
+Define import path aliases from the `tsconfig.json` file. For example:
+
+```json
+"paths": {
+    "src/*": ["src/*"],
+    "@stores/*": ["src/stores/*"]
+}
 ```
 
-### With [surge](https://surge.sh/)
+You can then import files under these aliases and Vite will resolve them. Your code editor should also use them
+for automatic imports:
 
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
+```ts
+import { users } from '@stores/users'; // src/stores/users.ts
 ```
 
-Then, from within your project folder:
+The root directory is configured as a base path for imports. This means you can also import modules with an absolute
+path from anywhere in the project instead of using a large number of `..` to traverse directories.
 
-```bash
-npm run build
-surge public my-project.surge.sh
+```ts
+import { users } from 'src/stores/users';
 ```
+
+<Route path="/detail/:id" let:params>
+	<DetailPage {params} />
+</Route>
+$$props

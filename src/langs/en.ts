@@ -1,4 +1,4 @@
-{
+export default {
 	"Domů": "Home",
 	"Detail": "Detail",
 	"Uživatelská sekce": "User section",
@@ -26,5 +26,5 @@
 	"Heslo": "Password",
 	"Vytvořit účet": "Create account",
 	"Uživatelská sekce pro {email}": "User section for {email}",
-	"Neautorizovaný přístup!": "Unauthorized access!"
-}
+	"Neautorizovaný přístup!": "Unauthorized access!",
+};

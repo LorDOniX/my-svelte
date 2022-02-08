@@ -1,63 +1,35 @@
 <script lang="ts">
-	import { Router, Link, Route, navigate } from "svelte-routing";
-	import { loadTrans } from "./Util/trans";
-	import { getLang, setLang } from "./Util/utils";
+	import { Router, Route } from "svelte-routing";
 
-	import Home from "./Routes/Home.svelte";
-	import Login from "./Routes/Login.svelte";
-	import Detail from "./Routes/Detail.svelte";
+	import MainPage from "./pages/MainPage.svelte";
+	import DetailPage from "./pages/DetailPage.svelte";
+	import LoginPage from "./pages/LoginPage.svelte";
+	import RegisterPage from "./pages/RegisterPage.svelte";
+	import UserPage from "./pages/UserPage.svelte";
+
+	import MainContent from "./components/MainContent.svelte";
+	import Menu from "./components/Menu.svelte";
+	import Content from "./components/Content.svelte";
+
+	import Heart from "./assets/heart.svg";
 
 	export let url = "";
-
-	function setLangValue(event: MouseEvent, langKey: string) {
-		event.preventDefault();
-
-		if (langKey === getLang()) {
-			return;
-		}
-
-		setLang(langKey);
-		location.reload();
-	}
-
-	function setCzech(event: MouseEvent) {
-		setLangValue(event, "cs");
-	}
-
-	function setEnglish(event: MouseEvent) {
-		setLangValue(event, "en");
-	}
 </script>
 
-{#await loadTrans(getLang()) then}
-	<Router url="{url}">
-		<div id="container">
-			<div id="menu">
-				<Link to="/">Home</Link>
-				<Link to="/detail/aaa">Detail</Link>
-				<Link to="/login">Login</Link>
-			</div>
-			<div>
-				<a href="/" on:click={setCzech}>Čeština</a>
-				<a href="/" on:click={setEnglish}>English</a>
-			</div>
-			<div id="page">
-				<Route path="/detail/:id" component="{Detail}" />
-				<Route path="/login" component="{Login}" />
-				<Route path="/" component="{Home}" />
-			</div>
-			<div>
-				<button type="button" on:click={() => navigate("/login")}>AAAA</button>
-			</div>
+<Router url="{url}">
+	<MainContent>
+		<Menu />
+		<div>
+			<img src={Heart} alt="" />
 		</div>
-	</Router>
-{/await}
-
-<style>
-	#container {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-</style>
+		<Content>
+			<Route path="/detail/:id" let:params>
+				<DetailPage {params} />
+			</Route>
+			<Route path="/login" component="{LoginPage}" />
+			<Route path="/register" component="{RegisterPage}" />
+			<Route path="/user" component="{UserPage}" />
+			<Route path="/" component="{MainPage}" />
+		</Content>
+	</MainContent>
+</Router>

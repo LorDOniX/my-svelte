@@ -1,4 +1,6 @@
 /node_modules/
-/public/build/
-
+/dist/
+yarn.lock
+package-lock.json
 .DS_Store
+/src/env.ts

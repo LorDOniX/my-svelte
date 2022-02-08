@@ -1,5 +1,5 @@
 <script>
-	import { trans, transPl } from '../Util/trans';
+	import { trans, transPl } from '../util/trans';
 	const count = 1;
 </script>
 
