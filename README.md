@@ -1,127 +1,75 @@
-# Svelte Vite Starter
+# Svelte boilerplate
 
-A starter template for [Svelte](https://svelte.dev) that comes preconfigured with [Vite](https://vitejs.dev/),
-TypeScript, SCSS, Babel, Autoprefixer, and HMR.
-
-- [Getting started](#getting-started)
-  - [Installation](#installation)
-  - [Starting the development server](#starting-the-development-server)
-  - [Building for production](#building-for-production)
-- [Usage](#usage)
-  - [Global stylesheets](#global-stylesheets)
-  - [Browsers list](#browsers-list)
-  - [Babel customization](#babel-customization)
-  - [Source maps in production](#source-maps-in-production)
-  - [Import path aliases](#import-path-aliases)
-
-> ⚠ **Consider trying the new vite-based [SvelteKit](https://kit.svelte.dev/)!**
-
+A startovací šablona pro [Svelte](https://svelte.dev) s [Vite](https://vitejs.dev/),
+TypeScript, SCSS, Autoprefixer, a HMR.
 ---
 
-## Getting started
-
-### Installation
-
-Pull the template files with [`degit`](https://github.com/Rich-Harris/degit) and install dependencies.
+## Instalace
 
 ```bash
-npx degit baileyherbert/svelte-vite-starter
 npm install
 ```
+## Lokální vývoj
 
-### Starting the development server
-
-Run the `dev` script to start a live development server with hot module replacement. Then check the output for a link
-to the app, which is usually `http://localhost:5000/`:
+Parametr `dev` spustí lokální vývoj s hot module replacement (HMR). Výstupem je webovka na `http://localhost:5000/`:
 
 ```bash
 npm run dev
 ```
 
-### Building for production
+## Build pro produkci
 
-Run the `build` script to bundle the app for production. The bundle will be created at `/dist/assets/` and the `dist`
-directory will contain all files you need to host the app:
+Parametr `build` vytvoří build pro nasazení do produkce. Výstupní složka pro assety je vytvořena v `/dist/assets/` a složka `dist` obsahuje veškeré potřebné věci pro nasazení.
 
 ```bash
 npm run build
 ```
 
-> 💡 **Tip:** You can quickly test the production build by running `npm run preview` locally.
+## Eslint
 
----
+Spouští se při vytvoření serveru, poté pro každý změněný soubor. Manuálně se dá spustit pomocí příkazu:
 
-## Usage
-
-### Global stylesheets
-
-Edit the `index.html` file and add additional `<link>` references to stylesheets:
-
-```html
-<link rel="stylesheet" type="text/css" href="/src/styles/index.scss">
+```bash
+npm run eslint
 ```
 
-You can specify `css`, `scss`, and `sass` files here, and they will be compiled and minified as necessary. These styles
-will be added to the bundle in the order specified. Svelte's styles will always load last.
+## Testování
 
-> 💡 **Note:** The paths to these assets must start with `/` in order to resolve.
+Testy jsou ve složce `src/__tests__` a testuje se pomocí nástroje `jest`. Testy se spustí před buildem pro produkci.
+Manuálně se dají spustit pomocí příkazu:
 
-### Browsers list
-
-The bundle will be compiled to run on the browsers specified in `package.json`:
-
-```json
-"browserslist": [
-    "defaults"
-]
+```bash
+npm run test
+npm run test:watch
 ```
 
-If you wish to customize this, please refer to the list of
-[example browserslist queries](https://github.com/browserslist/browserslist#full-list).
+## Překlady
 
-### Babel customization
+### Použití v projektu
 
-Production builds are compiled with Babel automatically. If you wish to disable it, edit the `vite.config.ts` file:
+Každý soubor, který importuje:
+```
+import { trans, transPl } from '../util/trans';
+```
+volá překlady pomocí:
+```
+<p>{trans("Bylo tam {count} {item} XXX{sdsdsd}YYYY", {
+	count,
+	item: transPl(count, "položka", "položky", "položek"),
+})}</p>
+```
+Kde pomocí `trans(překlad, { parametry pro nahrazení })` se nahradí překlady volitelným objektem s parametry.
+Pro použití překladů u pádů se dá použít `transPl(počet, "překlad pro 1 položku", "překlad pro 2-4 položek", "překlad pro 0 a 5+ položek")`.
+Defaultní jazyk je čeština.
 
-```ts
-const useBabel = false;
+### Zdrojové data
+
+Volání skriptu:
+
+```
+node i18n.js
 ```
 
-### Source maps in production
-
-Source maps are generated automatically during development. They are not included in production builds by default. If
-you wish to change this behavior, edit the `vite.config.ts` file:
-
-```ts
-const sourceMapsInProduction = true;
-```
-
-### Import path aliases
-
-Define import path aliases from the `tsconfig.json` file. For example:
-
-```json
-"paths": {
-    "src/*": ["src/*"],
-    "@stores/*": ["src/stores/*"]
-}
-```
-
-You can then import files under these aliases and Vite will resolve them. Your code editor should also use them
-for automatic imports:
-
-```ts
-import { users } from '@stores/users'; // src/stores/users.ts
-```
-
-The root directory is configured as a base path for imports. This means you can also import modules with an absolute
-path from anywhere in the project instead of using a large number of `..` to traverse directories.
-
-```ts
-import { users } from 'src/stores/users';
-```
-
-<Route path="/detail/:id" let:params>
-	<DetailPage {params} />
-</Route>
-$$props
+funguje tak, že projde všechny zdrojové soubory, vytáhne jejich klíče a z nich se vygeneruje nový jazykový soubor ve složce `i18n`.
+Pokud už soubor existuje, tak se při změně klíčů - přidání/odebrání vezme aktuální json s překlady, a pokud už dříve překlady existovaly, tak se použijí.
+Výstupem je pak soubor ve složce `src/langs/`. Jazyky jsou součástí balíčku a nejsou lazy loadované.
