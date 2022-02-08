@@ -40,7 +40,7 @@ const config = <UserConfig> defineConfig({
 			// @ts-ignore This is temporary until the type definitions are fixed!
 			hot: !production
 		}),
-		viteEslintPlugin(),
+		viteEslintPlugin(production),
 	],
 	server: {
 		host: 'localhost',

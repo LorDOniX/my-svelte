@@ -14,6 +14,9 @@
 	import Heart from "./assets/heart.svg";
 
 	export let url = "";
+
+	console.log(import.meta.env.VITE_LOGIN_URL);
+	console.log(import.meta.env.VITE_AUTH_URL);
 </script>
 
 <Router url="{url}">

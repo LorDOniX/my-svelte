@@ -3,7 +3,7 @@ const SRC_PATH = "src";
 const TESTS_PATH = "__tests__";
 const EXTENSIONS = [".svelte", ".ts"];
 
-export default () => {
+export default (production) => {
 	const eslint = new ESLint();
 
 	async function lintFiles(files) {
@@ -24,6 +24,8 @@ export default () => {
 		name: 'eslintPlugin',
 
 		async buildStart() {
+			if (production) return;
+
 			const resultText = await lintFiles([`./${SRC_PATH}`]);
 
 			setTimeout(() => {
@@ -32,6 +34,8 @@ export default () => {
 		},
 
 		async handleHotUpdate(ctx) {
+			if (production) return;
+
 			const fileName = ctx.file;
 			const srcPath = `${__dirname}/${SRC_PATH}/`;
 

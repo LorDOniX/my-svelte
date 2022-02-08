@@ -1,13 +1,11 @@
 {
 	"private": true,
 	"scripts": {
-		"dev": "npm run env-dev && npm run i18n && vite",
-		"build": "npm run test && npm run env-dist && npm run i18n && vite build",
+		"dev": "npm run i18n && vite",
+		"build": "npm run test && npm run eslint && npm run i18n && vite build",
 		"preview": "vite preview",
 		"eslint": "npx eslint ./src",
 		"i18n": "node i18n",
-		"env-dev": "cp conf/local.ts.env src/env.ts",
-		"env-dist": "cp conf/stable.ts.env src/env.ts",
 		"test": "jest src",
 		"test:watch": "npm run test -- --watch"
 	},
