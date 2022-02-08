@@ -21,12 +21,14 @@ export default () => {
 		},
 
 		async handleHotUpdate(ctx) {
-			if ([".svelte", ".ts"].indexOf(ctx.file) == -1) return;
+			const fileName = ctx.file;
 
-			const resultText = await lintFiles([ctx.file]);
+			if ([".svelte", ".ts"].indexOf(fileName) == -1 && fileName.indexOf("__tests__") != -1) return;
+
+			const resultText = await lintFiles([fileName]);
 
 			setTimeout(() => {
-				console.log(resultText || `${ctx.file} no-errors`);
+				console.log(resultText || `${fileName} no-errors`);
 			}, 100);
 		},
 	};
