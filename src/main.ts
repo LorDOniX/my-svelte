@@ -8,7 +8,7 @@ import { locale, translations } from 'svelte-intl';
 	const langData = await fetchJSON(`/langs/${langCode}.json`);
 
 	translations.update({
-		[langCode]: langData
+		[langCode]: langData as any
 	});
 	locale.set(langCode);
 

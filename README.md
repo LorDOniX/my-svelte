@@ -66,32 +66,5 @@ npm run test:watch
 
 ## Překlady
 
-### Použití v projektu
-
-Každý soubor, který importuje:
-```
-import { trans, transPl } from '../util/trans';
-```
-volá překlady pomocí:
-```
-<p>{trans("Bylo tam {count} {item} XXX{sdsdsd}YYYY", {
-	count,
-	item: transPl(count, "položka", "položky", "položek"),
-})}</p>
-```
-Kde pomocí `trans(překlad, { parametry pro nahrazení })` se nahradí překlady volitelným objektem s parametry.
-Pro použití překladů u pádů se dá použít `transPl(počet, "překlad pro 1 položku", "překlad pro 2-4 položek", "překlad pro 0 a 5+ položek")`.
-Defaultní jazyk je čeština.
-
-### Zdrojové data
-
-Volání skriptu:
-
-```
-node i18n.js
-```
-
-Funguje tak, že projde všechny zdrojové soubory, vytáhne jejich klíče a z nich se vygeneruje nový jazykový soubor ve složce `i18n`.
-Pokud už soubor existuje, tak se při změně klíčů - přidání/odebrání vezme aktuální json s překlady, a pokud už dříve překlady existovaly, tak se použijí.
-Výstupem je pak soubor ve složce `src/langs/`. Jazyky jsou součástí balíčku a nejsou lazy loadované.
-Soubor s jazykem pak používá klíč - český překlad, hodnota klíče je překlad pro daný jazyk.
+Jednotlivé jazyky jsou definovány jako JSON ve `public/langs/*.json`. Jako formát pro množné čísla a nahrazení je použit formatjs.
+Webovka si po spuštění šáhne do localStorage a podle toho nastaví jazyk nebo se použije defaultně čeština

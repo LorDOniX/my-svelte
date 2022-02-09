@@ -1,6 +1,5 @@
-import { IUser } from "../store/user";
-import { IUsers, UsersStore } from "../store/users";
-//import { LOGIN_URL, AUTH_URL } from "../env";
+import type { IUser } from "../store/user";
+import { type IUsers, UsersStore } from "../store/users";
 
 let users = [] as Array<IUsers>;
 

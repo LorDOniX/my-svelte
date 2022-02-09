@@ -29,3 +29,7 @@ declare module '*.webp' {
   const ref: string;
   export default ref;
 }
+
+declare module '*.svelte' {
+  export { SvelteComponentDev as default } from 'svelte/internal';
+}

@@ -16,6 +16,3 @@
 		<p>{ id }</p>
 	</div>
 </div>
-
-<style>
-</style>

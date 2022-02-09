@@ -29,6 +29,3 @@
 		count,
 	})}</p>
 </div>
-
-<style>
-</style>
