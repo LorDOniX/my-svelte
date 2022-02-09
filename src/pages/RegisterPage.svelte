@@ -1,5 +1,6 @@
 <script type="ts">
-	import { trans } from '../util/trans';
+	import { get } from 'svelte/store';
+	import { _, translate } from 'svelte-intl';
 	import { setJWT } from '../util/utils';
 	import { UserStore } from "../store/user";
 	import { UsersStore } from "../store/users";
@@ -17,11 +18,11 @@
 		sendError = "";
 
 		if (email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/iu) === null) {
-			emailError = email ? trans("Email není ve správném formátu!") : trans("Email je povinný!");
+			emailError = email ? get(translate)('loginPage.emailFormatError') : get(translate)("loginPage.emailRequiredError");
 		}
 
 		if (!password) {
-			passwordError = trans("Heslo je povinné!");
+			passwordError = get(translate)('loginPage.passwordRequiredError');
 		}
 
 		if (!emailError && !passwordError) {
@@ -40,11 +41,11 @@
 
 <div class="registerPage">
 	<form on:submit|preventDefault={handleSubmit}>
-		<h1>{trans("Registrace")}</h1>
+		<h1>{$_("registerPage.title")}</h1>
 		<div>
 			<label>
-				{trans("Email")}:
-				<input type="text" placeholder={trans("email")} bind:value={email} />
+				{$_("registerPage.email")}:
+				<input type="text" placeholder={$_("loginPage.email")} bind:value={email} />
 				<p class="errors">
 					{emailError}
 				</p>
@@ -52,15 +53,15 @@
 		</div>
 		<div>
 			<label>
-				{trans("Heslo")}:
-				<input type="password" placeholder={trans("heslo")} bind:value={password} />
+				{$_("registerPage.password")}:
+				<input type="password" placeholder={$_("loginPage.password")} bind:value={password} />
 				<p class="errors">
 					{passwordError}
 				</p>
 			</label>
 		</div>
 		<div>
-			<button type="submit">{trans("Vytvořit účet")}</button>
+			<button type="submit">{$_("registerPage.createAccount")}</button>
 		</div>
 		<p>{ sendError }</p>
 	</form>

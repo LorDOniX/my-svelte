@@ -1,0 +1,43 @@
+{
+	"mainPage": {
+		"title": "Hlavní stránka",
+		"desc": "Main page description",
+		"plural": "There was {count, plural, =0 {# items} one {# item} other {# items}}"
+	},
+	"detailPage": {
+		"title": "Page with detail",
+		"desc": "Popis stránky s detailem"
+	},
+	"loginPage": {
+		"title": "Login",
+		"emailLogged": "User {email}",
+		"loginOffer": "Don't you have a login?",
+		"register": "Register",
+		"email": "email",
+		"password": "password"
+	},
+	"menu": {
+		"home": "Home",
+		"detail": "Detail",
+		"userSection": "User section",
+		"logout": "Logout",
+		"languages": "Languages",
+		"czech": "Čeština",
+		"english": "English"
+	},
+	"registerPage": {
+		"title": "Register",
+		"email": "Email",
+		"emailRequiredError": "Email is required!",
+		"emailFormatError": "Email is not in correct format!",
+		"password": "Password",
+		"createAccount": "Create account",
+		"passwordRequiredError": "Password is required!"
+	},
+	"userPage": {
+		"title": "User section for {email}",
+		"userData": "User data",
+		"dataIsLoading": "Data is loading...",
+		"unauthorized": "Unauthorized access!"
+	}
+}

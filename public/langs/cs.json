@@ -1,0 +1,43 @@
+{
+	"mainPage": {
+		"title": "Hlavní stránka",
+		"desc": "Popis hlavní stránky",
+		"plural": "{count, plural, =0 {Bylo tam} one {Byla tam} other {Byly tam}} {count} {count, plural, =0 {položek} one {položka} other {položky}}"
+	},
+	"detailPage": {
+		"title": "Stránka s detailem",
+		"desc": "Popis stránky s detailem"
+	},
+	"loginPage": {
+		"title": "Přihlášení",
+		"emailLogged": "Uživatel {email}",
+		"loginOffer": "Nemáte login?",
+		"register": "Registrace",
+		"email": "email",
+		"password": "heslo"
+	},
+	"menu": {
+		"home": "Domů",
+		"detail": "Detail",
+		"userSection": "Uživatelská sekce",
+		"logout": "Odhlásit se",
+		"languages": "Jazyky",
+		"czech": "Čeština",
+		"english": "English"
+	},
+	"registerPage": {
+		"title": "Registrace",
+		"email": "Email",
+		"emailRequiredError": "Email je povinný!",
+		"emailFormatError": "Email není ve správném formátu!",
+		"password": "Heslo",
+		"createAccount": "Vytvořit účet",
+		"passwordRequiredError": "Heslo je povinné!"
+	},
+	"userPage": {
+		"title": "Uživatelská sekce pro {email}",
+		"userData": "Uživatelská data",
+		"dataIsLoading": "Data se načítají...",
+		"unauthorized": "Neautorizovaný přístup!"
+	}
+}

@@ -1,6 +1,6 @@
 <script>
 	import { onDestroy } from 'svelte';
-	import { trans } from '../util/trans';
+	import { _ } from 'svelte-intl';
 	import { setJWT } from '../util/utils';
 	import { Link } from "svelte-routing";
 	import { login } from "../providers/login";
@@ -45,18 +45,20 @@
 
 <div class="loginPage">
 	{#if user.email }
-		<h1>{trans("Uživatel {email}", { email: user.email })}</h1>
+		<h1>{$_("loginPage.emailLogged", { email: user.email })}</h1>
 	{:else}
-		<h1>{trans("Přihlášení")}</h1>
-		<p>{trans("Nemáte login?")}<Link to="/register">{trans("Registrujte se")}</Link></p>
+		<h1>{$_("loginPage.title")}</h1>
+		<p>{$_("loginPage.loginOffer")}
+			<Link to="/register">{$_("loginPage.register")}</Link>
+		</p>
 		<div>
-			<input type="text" placeholder={trans("email")} bind:value={email} />
+			<input type="text" placeholder={$_("loginPage.email")} bind:value={email} />
 		</div>
 		<div>
-			<input type="password" placeholder={trans("heslo")} bind:value={password} />
+			<input type="password" placeholder={$_("loginPage.password")} bind:value={password} />
 		</div>
 		<div>
-			<button type="button" on:click={onClick}>{trans("Přihlásit")}</button>
+			<button type="button" on:click={onClick}>{$_("loginPage.title")}</button>
 		</div>
 		<p>{ error }</p>
 	{/if}

@@ -24,3 +24,15 @@ export function setLang(lang: string): void {
 		localStorage.removeItem(LS_LANG_KEY);
 	}
 }
+
+export async function fetchJSON(path: string): Promise<JSON> {
+	const response = await fetch(path, {
+		headers: {
+			Accept: 'application/json',
+		},
+		credentials: 'include',
+	});
+	const json = await response.json() as JSON;
+
+	return json;
+}

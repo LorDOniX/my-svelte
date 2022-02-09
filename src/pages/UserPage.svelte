@@ -1,7 +1,7 @@
 <script>
 	import { onDestroy } from 'svelte';
 	import { UserStore } from "../store/user";
-	import { trans } from "../util/trans";
+	import { _ } from 'svelte-intl';
 
 	let user = { email: "" };
 
@@ -16,8 +16,8 @@
 
 <div class="userPage">
 	{#if user.email}
-		<h1>{trans("Uživatelská sekce pro {email}", { email: user.email })}</h1>
+		<h1>{$_("userPage.title", { email: user.email })}</h1>
 	{:else}
-		<h1>{trans("Neautorizovaný přístup!")}</h1>
+		<h1>{$_("userPage.unauthorized")}</h1>
 	{/if}
 </div>

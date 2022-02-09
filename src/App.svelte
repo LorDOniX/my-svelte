@@ -15,7 +15,9 @@
 
 	export let url = "";
 
+	/* eslint-disable no-console */
 	console.log(import.meta.env.VITE_LOGIN_URL);
+	/* eslint-disable no-console */
 	console.log(import.meta.env.VITE_AUTH_URL);
 </script>
 

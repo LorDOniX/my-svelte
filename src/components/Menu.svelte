@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { Link, navigate } from "svelte-routing";
 	import { setLang, getLang, setJWT } from '../util/utils';
-	import { trans } from "../util/trans";
+	import { _ } from 'svelte-intl';
 	import { UserStore } from "../store/user";
 
 	let user = {
@@ -49,29 +49,29 @@
 <div class="menu">
 	<ul>
 		<Link to="/">
-			<li>{trans("Domů")}</li>
+			<li>{$_("menu.home")}</li>
 		</Link>
 		<Link to="/detail/10">
-			<li>{trans("Detail")}</li>
+			<li>{$_("menu.detail")}</li>
 		</Link>
 		{#if user.email }
 			<Link to="/user">
-				<li>{trans("Uživatelská sekce")}</li>
+				<li>{$_("menu.userSection")}</li>
 			</Link>
 			<li>
-				<a href="/" on:click={logout}>{trans("Odhlásit")}</a>
+				<a href="/" on:click={logout}>{$_("menu.logout")}</a>
 			</li>
 		{:else}
 			<Link to="/login">
-				<li>{trans("Přihlásit")}</li>
+				<li>{$_("loginPage.title")}</li>
 			</Link>
 		{/if}
 	</ul>
 	<div>
-		<p>{trans("Jazyky")}</p>
+		<p>{$_("menu.languages")}</p>
 		<div>
-			<a href="/" on:click={setCzech}>{trans("Čeština")}</a>
-			<a href="/" on:click={setEnglish}>{trans("English")}</a>
+			<a href="/" on:click={setCzech}>{$_("menu.czech")}</a>
+			<a href="/" on:click={setEnglish}>{$_("menu.english")}</a>
 		</div>
 	</div>
 </div>

@@ -1,14 +1,32 @@
-<script>
-	import { trans, transPl } from '../util/trans';
-	const count = 1;
+<script type="ts">
+	import { _ } from 'svelte-intl';
+	let count = 0;
+
+	function wait(ms: number) {
+		return new Promise(resolve => {
+			setTimeout(() => {
+				resolve({});
+			}, ms);
+		});
+	}
+
+	async function main() {
+		/* eslint-disable no-magic-numbers */
+		for (let ind = 0; ind < 5; ind++) {
+			/* eslint-disable no-await-in-loop */
+			await wait(1000);
+			count++;
+		}
+	}
+
+	main().then(() => {}, () => {});
 </script>
 
 <div id="home">
-	<h1>{trans("Hlavní stránka")}</h1>
-	<p>{trans("Popis hlavní stránky")}</p>
-	<p>{trans("Bylo tam {count} {item} XXX{sdsdsd}YYYY", {
+	<h1>{$_("mainPage.title")}</h1>
+	<p>{$_("mainPage.desc")}</p>
+	<p>{$_("mainPage.plural", {
 		count,
-		item: transPl(count, "položka", "položky", "položek"),
 	})}</p>
 </div>
 

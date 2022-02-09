@@ -23,17 +23,17 @@ export default (production) => {
 	return {
 		name: 'eslintPlugin',
 
-		async buildStart() {
+		buildStart() {
 			if (production) return;
 
-			const resultText = await lintFiles([`./${SRC_PATH}`]);
+			setTimeout(async() => {
+				const resultText = await lintFiles([`./${SRC_PATH}`]);
 
-			setTimeout(() => {
 				console.log(resultText || "Main build no-errors");
 			}, 1000);
 		},
 
-		async handleHotUpdate(ctx) {
+		handleHotUpdate(ctx) {
 			if (production) return;
 
 			const fileName = ctx.file;
@@ -41,9 +41,9 @@ export default (production) => {
 
 			if (fileName.indexOf(srcPath) == -1 || fileName.indexOf(TESTS_PATH) != -1 || !testExtension(fileName, EXTENSIONS)) return;
 
-			const resultText = await lintFiles([fileName]);
+			setTimeout(async() => {
+				const resultText = await lintFiles([fileName]);
 
-			setTimeout(() => {
 				console.log(resultText || `${fileName} no-errors`);
 			}, 100);
 		},

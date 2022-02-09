@@ -1,5 +1,5 @@
 <script type="ts">
-	import { trans } from '../util/trans';
+	import { _ } from 'svelte-intl';
 	interface IDetail {
 		id: string
 	}
@@ -11,8 +11,8 @@
 
 <div id="detail">
 	<div class="detailPage">
-		<h1>{trans("Stránka s detailem")}</h1>
-		<p>{trans("Popis hlavní stránky")}</p>
+		<h1>{$_("detailPage.title")}</h1>
+		<p>{$_("detailPage.desc")}</p>
 		<p>{ id }</p>
 	</div>
 </div>

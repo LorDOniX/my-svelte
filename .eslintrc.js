@@ -226,5 +226,6 @@ module.exports = {
 		'rest-spread-spacing': ['error', 'never'],
 		'template-curly-spacing': 'error',
 		'yield-star-spacing': ['error', 'after'],
+		'@typescript-eslint/no-empty-function': ["error", { "allow": ["arrowFunctions"] }]
 	},
   }
