@@ -2,7 +2,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite",
-		"build": "npm run test && npm run eslint && vite build",
+		"build": "npm run test && vite build",
 		"preview": "vite preview",
 		"eslint": "npx eslint ./src",
 		"test": "jest src",
