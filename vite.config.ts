@@ -25,7 +25,7 @@ import legacy from '@vitejs/plugin-legacy';
 import autoprefixer from 'autoprefixer';
 import pkg from './package.json';
 import tsconfig from './tsconfig.json';
-import viteEslintPlugin from "./vite-eslint-plugin";
+import eslintPlugin from 'vite-plugin-eslint';
 
 const production = process.env.NODE_ENV === 'production';
 const config = <UserConfig> defineConfig({
@@ -40,7 +40,10 @@ const config = <UserConfig> defineConfig({
 			// @ts-ignore This is temporary until the type definitions are fixed!
 			hot: !production
 		}),
-		viteEslintPlugin(production),
+		eslintPlugin({
+			cache: false,
+			include: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.svelte'],
+		}),
 	],
 	server: {
 		host: 'localhost',
