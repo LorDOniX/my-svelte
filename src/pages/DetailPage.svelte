@@ -16,3 +16,9 @@
 		<p>{ id }</p>
 	</div>
 </div>
+
+<style lang="scss">
+	#detail {
+		color: $fontColor;
+	}
+</style>

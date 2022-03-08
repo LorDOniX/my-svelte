@@ -27,9 +27,9 @@
 
 <div class="mainContent">
 	<slot></slot>
-</div>;
+</div>
 
-<style>
+<style lang="scss">
 	.mainContent {
 		margin: 0 auto;
 		margin-top: 50px;

@@ -13,7 +13,8 @@
 		"strict": false,
 		"baseUrl": ".",
 		"paths": {
-			"src/*": ["src/*"]
+			"src/*": ["src/*"],
+			"~/*": ["src/*"]
 		},
 		"types": [
 			"svelte",

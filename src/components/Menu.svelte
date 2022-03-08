@@ -76,7 +76,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.menu {
 		border: 1px solid black;
 	}
